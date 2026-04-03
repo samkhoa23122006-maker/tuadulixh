@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Đăng nhập - BusTicket Pro</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-container">
+            <a href="sai.html" class="logo">BusTicket Pro</a>
+            <ul class="nav-links">
+                <li><a href="sai.html">Trang chủ</a></li>
+                <li><a href="routes.html">Tuyến đường</a></li>
+                <li><a href="about.html">Về chúng tôi</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+                <li><a href="login.html">Đăng nhập</a></li>
+                <li><a href="register.html">Đăng ký</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container" style="max-width: 400px; margin: 50px auto;">
+        <div style="background: white; padding: 40px; border-radius: 10px; box-shadow: var(--shadow);">
+            <h2 style="text-align: center; color: var(--primary);">Đăng nhập</h2>
+            <form id="loginForm">
+                <div style="margin-bottom: 20px;">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label for="password">Mật khẩu</label>
+                    <div style="position: relative;">
+                        <input type="password" id="password" required>
+                        <button type="button" id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;">👁️</button>
+                    </div>
+                </div>
+                <button type="submit" class="btn-main" style="width: 100%;">Đăng nhập</button>
+            </form>
+            <p style="text-align: center; margin-top: 20px;">Chưa có tài khoản? <a href="register.html">Đăng ký</a></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const password = document.getElementById('password');
+            if (password.type === 'password') {
+                password.type = 'text';
+                this.textContent = '🙈';
+            } else {
+                password.type = 'password';
+                this.textContent = '👁️';
+            }
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const user = users.find(u => u.phone === phone && u.password === password);
+
+            if (user) {
+                alert('Đăng nhập thành công!');
+                // Redirect to main page or dashboard
+                window.location.href = 'sai.html';
+            } else {
+                alert('Số điện thoại hoặc mật khẩu không đúng!');
+            }
+        });
+    </script>
+</body>
+</html>

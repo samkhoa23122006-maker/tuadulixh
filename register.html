@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Đăng ký - BusTicket Pro</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-container">
+            <a href="sai.html" class="logo">BusTicket Pro</a>
+            <ul class="nav-links">
+                <li><a href="sai.html">Trang chủ</a></li>
+                <li><a href="routes.html">Tuyến đường</a></li>
+                <li><a href="about.html">Về chúng tôi</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+                <li><a href="login.html">Đăng nhập</a></li>
+                <li><a href="register.html">Đăng ký</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container" style="max-width: 400px; margin: 50px auto;">
+        <div style="background: white; padding: 40px; border-radius: 10px; box-shadow: var(--shadow);">
+            <h2 style="text-align: center; color: var(--primary);">Đăng ký</h2>
+            <div id="registerForm">
+                <form id="regForm">
+                    <div style="margin-bottom: 20px;">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label for="phone">Số điện thoại</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label for="password">Mật khẩu</label>
+                        <div style="position: relative;">
+                            <input type="password" id="password" required>
+                            <button type="button" id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer;">👁️</button>
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label for="confirmPassword">Xác nhận mật khẩu</label>
+                        <input type="password" id="confirmPassword" required>
+                    </div>
+                    <button type="submit" class="btn-main" style="width: 100%;">Đăng ký</button>
+                </form>
+            </div>
+            <div id="otpSection" style="display: none;">
+                <p style="text-align: center;">Mã OTP đã được gửi đến số điện thoại của bạn.</p>
+                <div style="margin-bottom: 20px;">
+                    <label for="otp">Nhập mã OTP</label>
+                    <input type="text" id="otp" required maxlength="6">
+                </div>
+                <button id="verifyOtp" class="btn-main" style="width: 100%;">Xác nhận</button>
+                <p id="otpError" style="color: red; text-align: center; display: none;">Mã OTP không đúng!</p>
+            </div>
+            <p style="text-align: center; margin-top: 20px;">Đã có tài khoản? <a href="login.html">Đăng nhập</a></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        let userData = {};
+
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const password = document.getElementById('password');
+            if (password.type === 'password') {
+                password.type = 'text';
+                this.textContent = '🙈';
+            } else {
+                password.type = 'password';
+                this.textContent = '👁️';
+            }
+        });
+
+        document.getElementById('regForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Mật khẩu xác nhận không khớp!');
+                return;
+            }
+
+            // Check if user already exists
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            if (users.find(u => u.phone === phone)) {
+                alert('Số điện thoại đã được đăng ký!');
+                return;
+            }
+
+            userData = { email, phone, password };
+
+            // Generate OTP
+            const otp = Math.floor(100000 + Math.random() * 900000);
+            localStorage.setItem('otp', otp.toString());
+            alert(`Mã OTP của bạn là: ${otp}`); // For demo, in real app send via SMS
+
+            // Hide form, show OTP
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('otpSection').style.display = 'block';
+        });
+
+        document.getElementById('verifyOtp').addEventListener('click', function() {
+            const enteredOtp = document.getElementById('otp').value;
+            const storedOtp = localStorage.getItem('otp');
+
+            if (enteredOtp === storedOtp) {
+                // Save user
+                const users = JSON.parse(localStorage.getItem('users') || '[]');
+                users.push(userData);
+                localStorage.setItem('users', JSON.stringify(users));
+                localStorage.removeItem('otp');
+
+                alert('Đăng ký thành công!');
+                window.location.href = 'login.html';
+            } else {
+                document.getElementById('otpError').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
