@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>BusTicket Pro - Trang Chủ</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">BusTicket Pro</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="routes.html">Tuyến đường</a></li>
+                <li><a href="about.html">Về chúng tôi</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+            </ul>
+            <button class="btn-main" onclick="openModal()" style="padding: 10px 20px">Đăng nhập</button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Khám phá Việt Nam</h1>
+        <p>Hành trình an toàn - Dịch vụ tận tâm</p>
+    </header>
+
+    <section class="search-card">
+        <div><label>Điểm đi</label>
+            <select id="departure-select">
+                <option>Hà Nội</option>
+                <option>Sài Gòn</option>
+                <option>Đà Nẵng</option>
+                <option>Thái Nguyên</option>
+                <option>Hải Phòng</option>
+                <option>Bắc Ninh</option>
+            </select></div>
+        <div><label>Điểm đến</label>
+            <select id="destination-select">
+                <option>Sapa</option>
+                <option>Đà Lạt</option>
+                <option>Phú Quốc</option>
+                <option>Hội An</option>
+                <option>Vũng Tàu</option>
+                <option>Huế</option>
+            </select></div>
+        <div><label>Ngày đi</label><input type="date" id="trip-date" value="2026-03-31"></div>
+        <div><label>Hành khách</label>
+            <select id="passengers-select">
+                <option>1 Người</option>
+                <option>2 Người</option>
+                <option>3 Người</option>
+                <option>4 Người</option>
+                <option>5 Người</option>
+                <option>6 Người</option>
+                <option>7 Người</option>
+                <option>8 Người</option>
+                <option>9 Người</option>
+                <option>10 Người</option>
+                <option>20 người</option>
+                <option>30 người</option>
+            </select>
+        </div>
+        <button id="search-route-btn" class="btn-main">TÌM CHUYẾN</button>
+    </section>
+
+    <div class="container">
+        <h2 style="text-align:center; margin-bottom:30px">Cảm hứng du lịch</h2>
+        <div class="grid-3">
+            <div class="card"><img src="https://images.unsplash.com/photo-1528127269322-539801943592?w=500"><div class="card-content"><h3>Vịnh Hạ Long</h3></div></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=500"><div class="card-content"><h3>Sài Gòn Night</h3></div></div>
+            <div class="card"><img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=500"><div class="card-content"><h3>Xe Limousine VIP</h3></div></div>
+        </div>
+    </div>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span onclick="closeModal()" style="position:absolute; right:20px; top:10px; cursor:pointer; font-size:20px">&times;</span>
+            <h2 style="margin-bottom:20px">Đăng nhập</h2>
+            <input type="text" placeholder="Email" style="margin-bottom:15px">
+            <input type="password" placeholder="Mật khẩu" style="margin-bottom:15px">
+            <button class="btn-main" style="width:100%">VÀO HỆ THỐNG</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
