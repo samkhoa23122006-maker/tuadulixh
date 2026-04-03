@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>Đăng nhập - BusTicket Pro</title>
 </head>
 <body>
-    <div class="navbar">
+    <nav class="navbar">
         <div class="nav-container">
-            <a href="sai.html" class="logo">BusTicket Pro</a>
+            <a href="index.html" class="logo">BusTicket Pro</a>
             <ul class="nav-links">
-                <li><a href="sai.html">Trang chủ</a></li>
+                <li><a href="index.html">Trang chủ</a></li>
                 <li><a href="routes.html">Tuyến đường</a></li>
                 <li><a href="about.html">Về chúng tôi</a></li>
                 <li><a href="contact.html">Liên hệ</a></li>
@@ -19,11 +20,11 @@
                 <li><a href="register.html">Đăng ký</a></li>
             </ul>
         </div>
-    </div>
+    </nav>
 
     <div class="container" style="max-width: 400px; margin: 50px auto;">
-        <div style="background: white; padding: 40px; border-radius: 10px; box-shadow: var(--shadow);">
-            <h2 style="text-align: center; color: var(--primary);">Đăng nhập</h2>
+        <div style="background: white; padding: 40px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <h2 style="text-align: center; color: #0061ff;">Đăng nhập</h2>
             <form id="loginForm">
                 <div style="margin-bottom: 20px;">
                     <label for="phone">Số điện thoại</label>
@@ -66,7 +67,7 @@
             if (user) {
                 alert('Đăng nhập thành công!');
                 // Redirect to main page or dashboard
-                window.location.href = 'sai.html';
+                window.location.href = 'index.html';
             } else {
                 alert('Số điện thoại hoặc mật khẩu không đúng!');
             }
